@@ -1,0 +1,17 @@
+name: build-magisk-module
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bongkar sumber
+        run: bash bootstrap.sh
+      - name: Build modul
+        working-directory: MochiLynVoice
+        run: bash build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MochiLynVoice-magisk
+          path: MochiLynVoice/MochiLynVoice-*.zip
